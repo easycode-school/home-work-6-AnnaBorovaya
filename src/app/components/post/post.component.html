@@ -1,0 +1,20 @@
+<div class="mb-3" *ngFor = 'let post of posts'>
+  <div class="card  mb-3">
+    <ul class="list-group list-group-flush" style="width: 100%">
+      <li class="list-group-item">{{post.userId}}</li>
+      <li class="list-group-item">{{post.title}}</li>
+      <li class="list-group-item">{{post.body}}</li>
+      <li class="list-group-item">{{post.id}}</li>
+    </ul>
+  </div>
+  <button type="button" (click)="deletePost(post.id)" class="btn btn-danger mr-3">Delete</button>
+  <button type="button" (click)="editPost(post.id)" class="btn btn-warning mr-3">Edit</button>
+  <button type="button" (click)="cancelPost(post.id)" *ngIf='isActivePost == post.id' class="btn secondary  mr-3">Cancel</button>
+  <button type="button" (click)="getComment(post.id)" class="btn btn-success mr-3">Comment</button>
+  <div *ngIf='isActiveComment == post.id'>
+    <div class="mb-3" *ngFor='let comment of currentComments'>
+      <div>{{comment.name}}</div>
+      <div>{{comment.body}}</div>
+    </div>
+  </div>
+</div>
