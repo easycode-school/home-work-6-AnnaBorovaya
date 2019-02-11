@@ -31,7 +31,6 @@ export class FormComponent implements OnInit {
    */
   ngOnInit() {
     this.postEditService.postObservableSubject.subscribe((currentPost: Post) => {
-      console.log(currentPost);
       this.newPost.userId = currentPost.userId;
       this.newPost.title = currentPost.title;
       this.newPost.body = currentPost.body;
@@ -47,7 +46,6 @@ export class FormComponent implements OnInit {
    */
   addPost(): void {
     this.postService.addExampl(this.newPost);
-    console.log(this.postService.posts);
     this.form.resetForm();
   }
 }

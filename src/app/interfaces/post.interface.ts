@@ -1,4 +1,4 @@
-export interface Post { // далее импортим его в наш сервис
+export interface Post {
     userId: number | string;
     title: string;
     body: string;

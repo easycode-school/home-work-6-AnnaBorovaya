@@ -10,7 +10,7 @@ import { EditPostService } from './../../services/edit-post.service';
 })
 
 export class PostComponent implements OnInit {
-  public posts: Post[] = []; // массив стартовых постов
+  public posts: Post[] = []; // массив текущих постов
   public currentPost;
   public isActivePost;
   public isActiveComment;

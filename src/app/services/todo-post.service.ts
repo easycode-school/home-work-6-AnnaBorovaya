@@ -68,7 +68,6 @@ export class TodoPostService {
    * делается запрос на сервер для получения постов
    */
   public showComment(id) {
-    console.log(id);
     return this.http.get(`${this.apiUrl}/posts/${id}/comments`);
   }
 }
