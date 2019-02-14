@@ -9,7 +9,7 @@
   </div>
   <button type="button" (click)="deletePost(post.id)" class="btn btn-danger mr-3">Delete</button>
   <button type="button" (click)="editPost(post.id)" class="btn btn-warning mr-3">Edit</button>
-  <button type="button" (click)="cancelPost(post.id)" *ngIf='isActivePost == post.id' class="btn secondary  mr-3">Cancel</button>
+  <button type="button" *ngIf='isActivePost == post.id' (click)="cancelPost(post.id)"  class="btn secondary  mr-3">Cancel</button>
   <button type="button" (click)="getComment(post.id)" class="btn btn-success mr-3">Comment</button>
   <div *ngIf='isActiveComment == post.id'>
     <div class="mb-3" *ngFor='let comment of currentComments'>

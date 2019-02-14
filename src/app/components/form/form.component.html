@@ -2,16 +2,20 @@
     <form class="col-lg-8" (ngSubmit)='addPost(form)' #form='ngForm'>
         <div class="form-group">
             <label for="exampleInputEmail1">Id Users</label>
-            <input [(ngModel)]='newPost.id' name='id' type="number" class="form-control" id="exampleInputPassword1" placeholder="Id Users" required>
+            <input [(ngModel)]='postInForm.userId' name='userId' type="number" class="form-control" id="exampleInputPassword1" placeholder="Id Users" required>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Title</label>
-            <input [(ngModel)]='newPost.title' name='title' type="text" class="form-control" id="exampleInputPassword1" placeholder="Title" required>
+            <input [(ngModel)]='postInForm.title' name='title' type="text" class="form-control" id="exampleInputPassword1" placeholder="Title" required>
         </div>
         <div class="form-group">
             <label class="form-check-label" for="exampleCheck1">Body</label>
-            <input [(ngModel)]='newPost.body'name='body' type="text" class="form-control" id="exampleInputPassword1" placeholder="Body" required>
+            <input [(ngModel)]='postInForm.body'name='body' type="text" class="form-control" id="exampleInputPassword1" placeholder="Body" required>
         </div>
-        <button [disabled]='form.invalid' type="submit" class="btn btn-primary">Submit</button>
+        <div class="form-group">
+            <label class="form-check-label" for="exampleCheck1">Id</label>
+            <input [disabled]=true [(ngModel)]='postInForm.id'name='id' type="text" class="form-control" id="exampleInputPassword1" placeholder="Id" required>
+        </div>
+        <button *ngIf='!activeButton'  [disabled]='form.invalid' type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

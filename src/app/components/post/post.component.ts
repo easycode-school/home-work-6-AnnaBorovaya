@@ -31,12 +31,11 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.postService.getExample().subscribe(
       (posts: Post[]) => {
-        this.posts = posts; // получение стартовых постов и присовение стартовых значений в переменную
+        this.posts = posts;
       },
       (err) => console.log(err),
       () => console.log('Complit')
     );
-
     this.postService.postObservableSubject.subscribe((data: Post[]) => {
       this.posts = data;
       }

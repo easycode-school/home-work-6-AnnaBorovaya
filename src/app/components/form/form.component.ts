@@ -11,11 +11,13 @@ import { NgForm } from '@angular/forms';
 })
 
 export class FormComponent implements OnInit {
+ 
   @ViewChild('form') form: NgForm;
-  private newPost: Post = {
+  public postInForm: Post = {
     userId: '',
     title: '',
-    body: ''
+    body: '',
+    id: ''
   };
 
   constructor(
@@ -31,21 +33,30 @@ export class FormComponent implements OnInit {
    */
   ngOnInit() {
     this.postEditService.postObservableSubject.subscribe((currentPost: Post) => {
-      this.newPost.userId = currentPost.userId;
-      this.newPost.title = currentPost.title;
-      this.newPost.body = currentPost.body;
-      }
-    );
+      this.postInForm = currentPost;
+    });
   }
 
   /**
-   * addPost - метод который вызывается при submit формы
-   * вызывается метод в postService, туда передается объект newPost который связан двусторонней привязкой с формой,
-   * где в массив добавляется один пост, форма сбрасывается
-   * @param form - object
+   * addPost - метод который вызывается при submit формы, переьираем массив наших Postov и :
+   * - если id поста который записан в Forme есть в нашем массиве Postov, то вызываем метод addEditedPost в котором:
+   * делаем запрос PUT на сервер и при получении ответа в редактируемый Пост записываем отредактированный Пост
+   * сбрасываем форму.
+   * - если id поста не существует, то вызываем метод addExampl в котором:
+   * делаем запрос POST запрос на сервер в котором наш Post добавляется в разметку и сбрасываем форму.
    */
   addPost(): void {
-    this.postService.addExampl(this.newPost);
-    this.form.resetForm();
+    if (!this.postInForm.id) {
+      this.postService.addExampl(this.postInForm);
+      this.form.resetForm();
+      return;
+    }
+    if (this.postService.posts.some((item) => this.postInForm.id === item.id )) {
+      this.postEditService.addEditedPost(this.postInForm.id, this.postInForm).subscribe((data) => {
+        this.postService.posts[ this.postInForm.id - 1 ] = data;
+        this.form.resetForm();
+      });
+      return;
+    }
   }
 }

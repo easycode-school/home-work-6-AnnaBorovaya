@@ -17,7 +17,7 @@ export class TodoPostService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {}
 
   private _postSource = new BehaviorSubject(this.posts);
   public postObservableSubject = this._postSource.asObservable();
@@ -45,7 +45,6 @@ export class TodoPostService {
     this._postSource.next(this.posts);
     this.http.delete(`${this.apiUrl}/posts/${id}`);
   }
-
   /**
    * addExampl - метод для добавления одного поста
    * в переменную this.posts добавляется новый Post
@@ -53,6 +52,7 @@ export class TodoPostService {
    * а также делается запрос на сервер где добавляется этот Post
    */
   public addExampl(post): void {
+    post.id = this.posts.length + 1;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-type': 'application/json',
@@ -62,7 +62,6 @@ export class TodoPostService {
     this._postSource.next(this.posts);
     this.http.post(`${this.apiUrl}/posts`, post, httpOptions);
   }
-
   /**
    * showCommen - метод для вывода комментариев под одним постом
    * делается запрос на сервер для получения постов
